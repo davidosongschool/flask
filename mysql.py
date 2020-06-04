@@ -1,4 +1,5 @@
 import os
+import datetime
 import pymysql
 
 connection = pymysql.connect(host='localhost',
@@ -7,9 +8,7 @@ connection = pymysql.connect(host='localhost',
 try:
     # Run a query
     with connection.cursor() as cursor:
-        sql = "SELECT * FROM Artist;"
-        cursor.execute(sql)
-        result = cursor.fetchall()
-        print(result)
+        cursor.execute("DELETE FROM Friends WHERE name = 'Bob';")
+        connection.commit()
 finally:
     connection.close()

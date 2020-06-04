@@ -1,35 +1,8 @@
 import os
-import json
-from flask import Flask, render_template
+from os import path
+if path.exists("env.py"):
+    import env
 
-app = Flask(__name__)
+MongoCon = os.environ.get('MongoCon')
 
-
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-
-@app.route("/about")
-def about():
-    data = []
-    with open("test.json", "r") as json_data:
-        data = json.load(json_data)
-    return render_template("about.html", market=data)
-
-
-@app.route("/contact")
-def contact():
-    return render_template("contact.html")
-
-
-@app.route("/careers")
-def careers():
-    return render_template("careers.html")
-
-
-if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"),
-            port=int(os.environ.get("PORT")),
-            debug=True  # Only include this in non-deployed code
-            )
+print(MongoCon)
